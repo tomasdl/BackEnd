@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Usuario(nombre, apellido, libros, mascotas) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.libros = libros;
+        this.mascotas = mascotas;
+      }
+      Usuario.prototype.getFullName = function () {
+        return console.log(`${this.nombre} ${this.apellido}`);
+      };
+      Usuario.prototype.addMascotas = function (mascotas) {
+        this.mascotas.push(mascotas);
+      };
+      Usuario.prototype.getMascotas = function () {
+        return console.log(this.mascotas.length);
+      };
+      Usuario.prototype.addBook = function (book, autor) {
+        this.libros.push({ nombre: book, autor: autor });
+      };
+      Usuario.prototype.getBooks = function () {
+        return console.log(this.libros.map((el) => el.nombre));
+      };
+      let usuario = new Usuario(
+        "juan",
+        "perez",
+        [
+          { nombre: "El Hobbit", autor: "Tolkien" },
+          { nombre: "El Alquimista", autor: "Paulo coelho" },
+        ],
+        ["perro", "gato", "jirafa"]
+      );
+      usuario.getFullName();
+      usuario.addMascotas("leon");
+      usuario.addMascotas("mammut");
+      usuario.getMascotas();
+      usuario.addBook("Harry Potter", "J.K.Rowling");
+      usuario.addBook("Spider-Man", "Stan Lee");
+      usuario.getBooks();
+      console.log(usuario);
+    </script>
+  </body>
+</html>
