@@ -13,7 +13,7 @@ const productos = fs.readFileSync("../desafio6/productos.txt", "utf-8");
 
 // inicio servidor
 const server = app.listen(PUERTO, () => {
-  console.log(`Escuchandote el servidor ${server.address().port}`);
+  console.log(`Escuchando el servidor ${server.address().port}`);
 });
 // manejo de errores
 server.on("error", (error) =>
