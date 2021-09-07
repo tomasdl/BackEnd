@@ -38,5 +38,5 @@ app.post('/api/productos/guardado/', (req, res)=>{
         ...req.body,
     }
     allProds.push(newProduct);
-    res.send(allProds)
+    res.send(newProduct);
 })
