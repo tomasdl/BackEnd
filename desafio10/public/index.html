@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="api/productos/guardar" style="margin:20px;">
+        <fieldset>
+            <legend class="hola">Product data</legend>
+            <p>Title:<input name="title" type="text" required></p>
+            <p>Price:<input name="price" type="number" required></p>
+            <p>Thumbnail:<input name="thumbnail" type="text" required></p>
+        </fieldset>    
+        <a href="/"> <button type="submit">save</button></a>
+    </form>
+</body>
+</html>

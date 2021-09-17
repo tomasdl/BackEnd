@@ -1,0 +1,27 @@
+[
+{
+    "title": "calculadora",
+    "price": 2000,
+    "foto": "https://www.iconfinder.com/icons/2757624/calculator_finance_math_money_number_icon",
+},
+{
+    "title": "regla",
+    "price": 35,
+    "foto": "https://www.iconfinder.com/icons/2716883/measure_ruler_tool_icon",
+},
+{
+    "title": "lapiz",
+    "price": 25,
+    "foto": "https://www.iconfinder.com/icons/7134661/write_pencil_edit_compose_icon",
+},
+{
+    "title": "sacapuntas",
+    "price": 50,
+    "foto": "https://www.iconfinder.com/icons/1806471/pencil_sharpener_icon" ,
+},
+{
+    "title": "mochila",
+    "price": 3500,
+    "foto": "https://www.iconfinder.com/icons/4301126/bag_bagpack_school_icon",
+},
+]
