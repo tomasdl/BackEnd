@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "proyectoback",
   "version": "1.0.0",
   "description": "",
@@ -15,6 +14,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "moment": "^2.29.1"
+    "express-handlebars": "^5.3.3",
+    "moment": "^2.29.1",
+    "pug": "^3.0.2"
   }
 }

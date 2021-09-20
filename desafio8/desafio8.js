@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: true}));
 
 const allProds = [];
 
-app.get('/api/productos/lista', (req, res) =>{
+app.get('/api/productos/listar', (req, res) =>{
     if (allProds.length===0){
         res.json({error: 'no hay produtos cargados'})
     } else {
@@ -22,7 +22,7 @@ app.get('/api/productos/lista', (req, res) =>{
     }
 })
 
-app.get('/api/productos/lista/:id', (req, res)=>{
+app.get('/api/productos/listar/:id', (req, res)=>{
     const {id} = req.params;
     const prodId = allProds.find (prod => prod.id == id)
     if(prodId){
@@ -32,7 +32,7 @@ app.get('/api/productos/lista/:id', (req, res)=>{
     }
 })
 
-app.post('/api/productos/guardado/', (req, res)=>{
+app.post('/api/productos/guardar/', (req, res)=>{
     const newProduct = {
         id: new Date().getTime(),
         ...req.body,
