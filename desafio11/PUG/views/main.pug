@@ -22,6 +22,10 @@ html(lang="en")
           each elem in elementos
             tr 
               td(class="nombre") #{elem.title}
-              td(class="precio") #{elem.price}
+              td(class="precio") $#{elem.price}
               td 
-                img(src="#{elem.thumbnail}" alt="alternatetext1" class="imagen")
+                img(
+                src = elem.thumbnail
+                alt = "alternatetext1"
+                class = "imagen"
+                )

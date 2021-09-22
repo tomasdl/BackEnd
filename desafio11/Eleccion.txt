@@ -1,0 +1,3 @@
+A pesar de las pocas descargas semanales, elijo pug para mi proyecto porque tiene una sintaxis bien similar a html, es limpio,
+tiene buena documentacion en paginas, github, y en youtube y siento que codeare mas fluidamente utilizando este motor
+de plantillas.

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2 class="hola">Lista de Productos</h2>
+    <% if (listExists) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Foto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% elementos.forEach(function(elem) { %>
+        <tr>
+          <td><%= elem.title %></td>
+          <td><%= elem.price %></td>
+          <td>
+            <img
+              width="200px"
+              src="<%=elem.thumbnail%>"
+              alt="alternatetext"
+              class="imagen"
+            />
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <h3>No hay Productos</h3>
+    <% } %>
+  </body>
+</html>

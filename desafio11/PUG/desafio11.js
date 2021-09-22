@@ -51,7 +51,7 @@ app.get('/productos/vista', (req, res)=> {
 });
 
 router.get('/productos/listar', (req,res)=>{
-    if (allProds.length===0){
+    if (allProds.length === 0){
         res.json({error: 'no hay produtos cargados'})
     } else {
         res.json(allProds)
