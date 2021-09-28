@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+    <title>Jugando con los web-socket</title>
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <form method="POST" action="api/productos/guardar" style="margin: 20px">
+      <fieldset>
+        <h2 class="hola">Ingresar Productos al carrito</h2>
+        <label>
+          Title: <input name="title" type="text" required /><br />
+        </label>
+        <label>
+          Price: <input name="price" type="number" required /><br />
+        </label>
+        <label>
+          Thumbnail: <input name="thumbnail" type="text" required /><br />
+        </label>
+      </fieldset>
+      <button type="submit" class="btn btn-secondary">Agregar</button>
+    </form>
+    <div class="mainDiv">
+    <h2 class="hola">Lista de productos</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Foto</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div id="message"></div>
+  </div>
+    <form onsubmit="return addMessage(this)" class="form">
+      <input type="email" id="email" placeholder="Ingrese su Email" required />
+      <textarea id="texto" placeholder="Chatea con nosotros" height="150px" required ></textarea>
+      <input type="submit" value="Enviar Mensaje" class="botonEnviarMsg"/>
+    </form>
+  </body>
+</html>
