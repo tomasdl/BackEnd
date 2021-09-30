@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "desafio7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "npm+deluca.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "tsc": "^2.0.3"
+  }
+}
