@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = 8080;
 
-http.listen(PORT, () => console.log("escuchando..."));
+http.listen(PORT, () => console.log("escuchando.."));
 
 // const server = app.listen(PORT, ()=>{
 //     console.log('Servidor HTTP escuchando en el puerto', server.address().port);
