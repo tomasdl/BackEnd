@@ -37,20 +37,20 @@ app.engine(
 app.set("views", "./views"); // especifica el directorio de vistas
 app.set("view engine", "hbs"); // registra el motor de plantillas
 
-// let listExists = true;
-// const allProds = [];
+let listExists = true;
+const allProds = [];
 
-// function listExist() {
-//   if (allProds.length > 0) {
-//     return (listExists = true);
-//   } else {
-//     return (listExists = false);
-//   }
-// }
+function listExist() {
+  if (allProds.length > 0) {
+    return (listExists = true);
+  } else {
+    return (listExists = false);
+  }
+}
 
-// app.get("/productos/vista", (req, res) => {
-//   res.render("main", { elementos: allProds, listExists: listExist() });
-// });
+app.get("/productos/vista", (req, res) => {
+  res.render("main", { elementos: allProds, listExists: listExist() });
+});
 
 router.get("/productos/listar", (req, res) => {
   prodsKnex
@@ -124,9 +124,6 @@ io.on("connection", (socket) => {
     .then((products) => {
       socket.emit("productCatalog", {
         products: products,
-        updateForm: false,
-        viewTitle: "Listado de productos",
-        errorMessage: "No hay productos.",
       });
     })
     .catch((e) => {

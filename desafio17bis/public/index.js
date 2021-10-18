@@ -1,5 +1,9 @@
 const socket = io();
 
+let sockets = io.connect();
+sockets.on("messages", (data) => {
+  console.log(data);
+});
 
 function enviar() {
   let title = document.getElementsByTagName("input")[0];
@@ -26,22 +30,6 @@ function addMessage(e) {
   socket.emit("newMsg", mensaje);
   return false;
 }
-sockets.on("messages", function (data) {
-  rendered(data);
-});
-
-function rendered(data) {
-  // console.log(data);
-  let html = data
-    .map((elem) => {
-      return `<div>
-  <strong class="useremail"> ${elem.email}</strong>:
-  <span class="usertime">${elem.time}</span>
-  <em class="usertext">${elem.text}</em> </div>`;
-    })
-    .join(" ");
-  document.getElementById("message").innerHTML = html;
-}
 
 socket.on("items", (data) => {
   render(data);
@@ -61,3 +49,19 @@ function render(dato) {
     .join(" ");
   document.getElementById("tbody").innerHTML = html;
 }
+
+function rendered(data) {
+  // console.log(data);
+  let html = data
+    .map((elem) => {
+      return `<div>
+  <strong class="useremail"> ${elem.email}</strong>:
+  <span class="usertime">${elem.time}</span>
+  <em class="usertext">${elem.text}</em> </div>`;
+    })
+    .join(" ");
+  document.getElementById("message").innerHTML = html;
+}
+sockets.on("messages", function (data) {
+  rendered(data);
+});

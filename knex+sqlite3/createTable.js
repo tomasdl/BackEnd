@@ -1,15 +1,15 @@
-const { options } = require("./options/mariadb");
-const knex = require("knex")(options);
+const { prodsOptions } = require("./options/mariadb");
+const prodsKnex = require("knex")(prodsOptions);
 
-knex.schema
-  .createTable("cars", (table) => {
-    table.increments("id"), table.string("name"), table.integer("price");
+prodsKnex.schema
+  .createTable("productos", (table) => {
+    table.increments("id"), table.string("title"), table.integer("price");
   })
   .then(() => {
     console.log("tabla creada!");
-    knex.destroy();
+    prodsKnex.destroy();
   })
   .catch((e) => {
     console.log("Error en create de tabla:", e);
-    knex.destroy();
+    prodsKnex.destroy();
   });

@@ -42,7 +42,7 @@ app.set("view engine", "hbs"); // registra el motor de plantillas
 
 let listExists = true;
 
-function hola() {
+function listExist() {
   if (allProds.length > 0) {
     return (listExists = true);
   } else {
@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
 });
 
 app.get("/productos/vista", (req, res) => {
-  res.render("main", { elementos: allProds, listExists: hola() });
+  res.render("main", { elementos: allProds, listExists: listExist() });
 });
 
 router.get("/productos/listar", (req, res) => {

@@ -1,7 +1,7 @@
 const msgOptions = {
     client: 'sqlite3',
     connection: {
-        filename: '../DB/mensajes.sqlite'
+        filename: './db/mensajes.sqlite'
     },
     useNullAsDefault: true
 }
