@@ -1,0 +1,28 @@
+use ecommerce
+
+db.productos.insert([{title:"calculadora", price: 120, foto: "https://cdn3.iconfinder.com/data/icons/start-up-4/44/calculator-512.png"},{title: "regla", price: 580, foto: "https://cdn1.iconfinder.com/data/icons/office-and-business-2-2/85/ruler_measure_tool-512.png"},{title: "lapiz", price: 900 , foto: "https://cdn2.iconfinder.com/data/icons/scenarium-vol-19/128/019_036_pencil_edit_write_compose-512.png"},{title: "sacapuntas", price: 1280 , foto:"https://cdn4.iconfinder.com/data/icons/thin-office/24/thin-1582_sharpener_pencil-512.png" },{title: "mochila", price:1700 , foto:"https://cdn0.iconfinder.com/data/icons/backpack-and-bag/512/bagpack-04-512.png" }, {title: "cuaderno", price:2300, foto: "https://cdn0.iconfinder.com/data/icons/school-74/128/school-14-512.png" },{title: "libro", price: 2860, foto: "https://cdn3.iconfinder.com/data/icons/education-528/64/education_educate_school_college_book-512.png"},{title: "pincel", price: 3350, foto: "https://cdn3.iconfinder.com/data/icons/education-528/64/education_educate_school_college_paint_brush_tool-512.png"},{title: "lupa", price: 4320, foto: "https://cdn0.iconfinder.com/data/icons/school-74/128/school-34-512.png"},{title: "abrochadora", price: 4990, foto: "https://cdn0.iconfinder.com/data/icons/stationery-jumpicon-glyph/32/-_Stapler-Office-Tools-School-Utensils-Paper-512.png"}])
+
+db.mensajes.insert([{email: "juan@gmail.com", time: "", text: "hola, buenas tardes"},{email: "vendedor@hotmail.com", time: "", text: "hola,¿en que te puedo ayudar?"},{email: "juan@gmail.com", time:"", text: "quiero comprar un sacapuntas"},{email: "vendedor@hotmail.com", time: "", text: "bueno, cuesta 1280 pesos y podes retirarlo hoy."},{email: "juan@gmail.com", time: "", text: "bueno, voy para alla"}])
+
+db.productos.count()
+
+db.mensajes.count()
+
+db.productos.insert({title: "sombrero", price: 2100, foto:"https://cdn4.iconfinder.com/data/icons/ballicons-2-new-generation-of-flat-icons/100/study_hat-512.png"})
+
+db.productos.find({"price":{$lt: 1000}})
+
+db.productos.find({$and:[{price:{$gt:1000}},{price:{$lt:3000}}]})
+
+db.productos.find({"price": {$gt: 3000}})
+
+db.productos.find({}).sort({"price": 1}).skip(2).limit(1)
+
+db.productos.updateMany({},{$set: {"stock": 100}})
+
+db.productos.updateMany({"price":{$gt: 4000}},{$set: {"stock": 0}})
+
+db.productos.deleteMany({"price":{$lt: 1000}})
+
+db.createUser({user: "pepe", pwd: "asd456", roles: [{role: "read", db: "ecommerce"}]})
+

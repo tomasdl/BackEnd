@@ -24,4 +24,29 @@
     "price": 3500,
     "foto": "https://cdn0.iconfinder.com/data/icons/backpack-and-bag/512/bagpack-04-512.png",
 },
+{
+"title": "cuaderno",
+"price": 200,
+"foto": "https://cdn0.iconfinder.com/data/icons/school-74/128/school-14-512.png"
+},
+{
+"title": "libro",
+"price": 1231,
+"foto": "https://cdn3.iconfinder.com/data/icons/education-528/64/education_educate_school_college_book-512.png",
+},
+{
+"title": "pincel",
+"price": 4000 ,
+"foto": "https://cdn3.iconfinder.com/data/icons/education-528/64/education_educate_school_college_paint_brush_tool-512.png",
+},
+{
+"title": "lupa",
+"price": 12546,
+"foto": "https://cdn0.iconfinder.com/data/icons/school-74/128/school-34-512.png",
+},
+{
+"title": "abrochadora",
+"price": 2400 ,
+"foto": "https://cdn0.iconfinder.com/data/icons/stationery-jumpicon-glyph/32/-_Stapler-Office-Tools-School-Utensils-Paper-512.png",
+},
 ]

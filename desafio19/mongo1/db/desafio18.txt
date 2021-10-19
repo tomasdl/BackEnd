@@ -1,0 +1,8 @@
+use prueba
+db.items.insert({'nombre':'fideos', 'categoria':'harina','stock':20})
+db.items.insert({'nombre':'leche', 'categoria':'lacteos','stock':30})
+db.items.insert({'nombre':'crema', 'categoria':'lacteos','stock':15})
+db.items.find()
+show dbs
+show collections
+db.items.find()
