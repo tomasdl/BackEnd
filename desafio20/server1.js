@@ -4,14 +4,15 @@ const path = require("path");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+
 // mongoose
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // //Messages mongoose
-import {Message}  from './models/messages.js';
+const Mensaje = require("./models/messages");
 
 //Products mongoose
-import {Producto}  from './models/producto.js';
+const Producto = require("./models/producto");
 
 const router = express.Router();
 const PORT = 8080;
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
-// handlebars
+// // handlebars
 
 app.engine(
   "hbs",
@@ -37,8 +38,6 @@ app.engine(
 
 app.set("views", "./views"); // especifica el directorio de vistas
 app.set("view engine", "hbs"); // registra el motor de plantillas
-
-const allProds = [];
 
 const items = [
   {
@@ -59,74 +58,88 @@ const items = [
     thumbnail:
       "https://cdn2.iconfinder.com/data/icons/scenarium-vol-19/128/019_036_pencil_edit_write_compose-512.png",
   },
+  {
+    title: "sacapuntas",
+    price: 50,
+    thumbnail:
+      "https://cdn4.iconfinder.com/data/icons/thin-office/24/thin-1582_sharpener_pencil-512.png",
+  },
+  {
+    title: "mochila",
+    price: 3500,
+    thumbnail:
+      "https://cdn0.iconfinder.com/data/icons/backpack-and-bag/512/bagpack-04-512.png",
+  },
+  {
+    title: "cuaderno",
+    price: 200,
+    thumbnail:
+      "https://cdn0.iconfinder.com/data/icons/school-74/128/school-14-512.png",
+  },
+  {
+    title: "libro",
+    price: 1231,
+    thumbnail:
+      "https://cdn3.iconfinder.com/data/icons/education-528/64/education_educate_school_college_book-512.png",
+  },
+  {
+    title: "pincel",
+    price: 4000,
+    thumbnail:
+      "https://cdn3.iconfinder.com/data/icons/education-528/64/education_educate_school_college_paint_brush_tool-512.png",
+  },
+  {
+    title: "lupa",
+    price: 12546,
+    thumbnail:
+      "https://cdn0.iconfinder.com/data/icons/school-74/128/school-34-512.png",
+  },
+  {
+    title: "abrochadora",
+    price: 2400,
+    thumbnail:
+      "https://cdn0.iconfinder.com/data/icons/stationery-jumpicon-glyph/32/-_Stapler-Office-Tools-School-Utensils-Paper-512.png",
+  },
 ];
 
-// dropeo tabla productos si existe
-prodsKnex.schema
-  .dropTableIfExists("productos")
+CRUD();
 
-  // creo la tabla productos
-  .then(() => {
-    console.log("Tabla productos borrada...");
-    return prodsKnex.schema.createTable("productos", (table) => {
-      table.increments("id"),
-        table.string("title"),
-        table.integer("price"),
-        table.string("thumbnail");
+async function CRUD() {
+  try {
+    // me conecto a la base de mongo via mongoose
+    const URI = "mongodb://localhost:27017/ecommerce";
+    await mongoose.connect(URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 1000,
     });
-  })
+    console.log("Conectado a la base de datos...");
 
-  // inserto los items en la tabla
-  .then(() => {
-    console.log("Tabla de productos creada...");
-    if (items.length) {
-      return prodsKnex("productos").insert(items);
-    } else {
-      return console.log("api no generada");
-    }
-  })
-  .then(() => {
-    console.log("Productos insertadas!");
-  })
-  .catch((e) => {
-    console.log("error al crear tabla productos:", e);
-    prodsKnex.destroy();
-  });
+    // borro los documentos de la coleccion cuando arranco el servidor
+    await Producto.deleteMany({});
+    console.log("productos borrados");
 
-
-
-msgKnex.schema.dropTableIfExists("messages").then(() => {
-  console.log("Tabla productos borrada...");
-});
-msgKnex.schema
-  .createTable("messages", (table) => {
-    table.string("email");
-    table.string("time");
-    table.string("text");
-  })
-  .then(() => {
-    console.log("Tabla messages creada.");
-  })
-  .catch((e) => {
-    console.log("Error al crear tabla messages.", e);
-    msgKnex.destroy();
-  });
+    // inserto items
+    await Producto.insertMany(items)
+      .then(console.log("productos insertados"))
+      .catch((e) => console.log("error al insertar docs: ", e));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 io.on("connection", (socket) => {
   console.log("Someone is connected");
 
   //funcion para leer todos los mensajes de la db y mostrarlos.
   function selectAllMessages() {
-    msgKnex
-      .select("*")
-      .from("messages")
-      .orderBy("time", "asc")
+    Mensaje.find()
+      .sort({ time: 1 })
       .then((messages) => {
         socket.emit("messages", messages);
       })
       .catch((e) => {
         console.log("Error getting messages: ", e);
-        msgKnex.destroy();
       });
   }
 
@@ -135,8 +148,8 @@ io.on("connection", (socket) => {
 
   //Inserto un nuevo mensaje en la base de datos de mensajes.
   socket.on("newMsg", (newMsg) => {
-    msgKnex("messages")
-      .insert(newMsg)
+    Mensaje
+      .create(newMsg)
       .then(() => {
         console.log("Mensaje insertado");
         selectAllMessages();
@@ -144,38 +157,33 @@ io.on("connection", (socket) => {
       })
       .catch((e) => {
         console.log("Error en Insert message: ", e);
-        msgKnex.destroy;
       });
   });
 });
 
 // Read productos
 router.get("/productos/listar", (req, res) => {
-  prodsKnex
-    .from("productos")
-    .select("*")
-    .then((productos) => {
-      if (productos.length) {
-        res.json(productos);
+  Producto.find()
+    .sort({ _id: 1 })
+    .then((products) => {
+      if (products.length) {
+        res.json(products);
       } else {
-        res.json({ msg: "No hay productos almacenados" });
+        res.render({ msg: "no hay productos cargados" });
       }
     })
     .catch((e) => {
-      console.log("Error en Select:", e);
-      prodsKnex.destroy();
+      console.log("Error trayendo productos: ", e);
     });
 });
 
 // Read productos por id
 router.get("/productos/listar/:id", (req, res) => {
   const { id } = req.params;
-  prodsKnex
-    .from("productos")
-    .select("id", "title", "price", "thumbnail")
-    .where("id", "=", id)
+  Producto.findById(id)
+    .exec()
     .then((productos) => {
-      if (productos.length) {
+      if (productos) {
         res.json(productos);
       } else {
         res.json({ msg: "producto no encontrado" });
@@ -183,7 +191,6 @@ router.get("/productos/listar/:id", (req, res) => {
     })
     .catch((e) => {
       console.log("Error en Select:", e);
-      prodsKnex.destroy();
     });
 });
 
@@ -192,15 +199,13 @@ router.post("/productos/guardar", (req, res) => {
   const newProduct = {
     ...req.body,
   };
-  prodsKnex("productos")
-    .insert(newProduct)
+  Producto.create(newProduct)
     .then(() => {
       console.log("Producto/s ingresado");
       res.status(201).redirect("/");
     })
     .catch((e) => {
       console.log("Error en Insert:", e);
-      prodsKnex.destroy();
     });
 });
 
@@ -209,10 +214,10 @@ router.put("/productos/actualizar/:id", (req, res) => {
   const { id } = req.params;
   const { title, price, thumbnail } = req.body;
 
-  prodsKnex
-    .from("productos")
-    .where("id", "=", id)
-    .update({ title: title, price: price, thumbnail: thumbnail })
+  Producto.updateOne(
+    { _id: id },
+    { $set: { title: title, price: price, thumbnail: thumbnail } }
+  )
     .then((producto) => {
       if (producto) {
         res.status(200).redirect("/");
@@ -223,7 +228,6 @@ router.put("/productos/actualizar/:id", (req, res) => {
     })
     .catch((e) => {
       console.log("Error en Update:", e);
-      prodsKnex.destroy();
     });
 });
 
@@ -231,10 +235,7 @@ router.put("/productos/actualizar/:id", (req, res) => {
 router.delete("/productos/borrar/:id", (req, res) => {
   const { id } = req.params;
 
-  prodsKnex
-    .from("productos")
-    .where("id", "=", id)
-    .del()
+  Producto.findByIdAndRemove(id)
     .then((producto) => {
       if (producto) {
         console.log("Filas borradas!");
@@ -245,6 +246,5 @@ router.delete("/productos/borrar/:id", (req, res) => {
     })
     .catch((e) => {
       console.log("Error en Delete:", e);
-      prodsKnex.destroy();
     });
 });

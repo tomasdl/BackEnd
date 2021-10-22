@@ -6,6 +6,4 @@ const MessageSchema = mongoose.Schema({
   text: { type: String, require: true, minLength: 3, maxLenghth: 100000 },
 })
 
-module.exports = {
-    Message: mongoose.model("Message", MessageSchema)
-}
+module.exports = mongoose.model("Mensaje", MessageSchema);

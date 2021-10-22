@@ -6,6 +6,4 @@ const ProductoSchema = mongoose.Schema({
   thumbnail: { type: String, require: true, minLength: 3, maxLenghth: 200 },
 });
 
-module.exports = {
-    Producto: mongoose.model("Producto", ProductoSchema)
-}
+module.exports = mongoose.model("Producto", ProductoSchema);
