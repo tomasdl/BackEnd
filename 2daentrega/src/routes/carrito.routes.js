@@ -1,17 +1,17 @@
-import {Router} from 'express';
+import { Router } from "express";
 import {
-	agregarProducto,
-	borrarProducto,
-	getCarrito,
-	getProductsFromCarrito,
-} from '../controllers/carrito.controller.js';
+  agregarProducto,
+  borrarProducto,
+  getCarrito,
+  getProductsFromCarrito,
+} from "../controllers/carrito.controller.js";
 
 const carritoRouter = Router();
 
 carritoRouter
-	.get('/', getCarrito)
-	.get('/productos', getProductsFromCarrito)
-	.post('/productos', agregarProducto)
-	.delete('/productos/:id', borrarProducto);
+  .get("/listar", getCarrito)
+  .get("/productos", getProductsFromCarrito)
+  .post("/agregar", agregarProducto)
+  .delete("/borrar/:id", borrarProducto);
 
 export default carritoRouter;

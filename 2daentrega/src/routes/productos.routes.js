@@ -10,9 +10,9 @@ const productosRouter = Router();
 
 productosRouter
 	.get('/', getProducts)
-	.get('/:id', getProducts)
-	.post('/', createProduct)
-	.put('/:id', updateProduct)
-	.delete('/:id', deleteProduct);
+	.get('/listar/:id', getProducts)
+	.post('/agregar', createProduct)
+	.put('/actualizar/:id', updateProduct)
+	.delete('/borrar/:id', deleteProduct);
 
 export default productosRouter;
